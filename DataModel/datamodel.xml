@@ -22,6 +22,16 @@
                 <Rule Name="Configuration"/>
             </Rules>
         </AttributeInfo>
+        <AttributeInfo Name="Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be added as a trunk (All 802.1Q tagged traffic from the connected ports will be able to rich these ports). Supported format: openflow:1::eth1;openflow:1:eth2">
+            <Rules>
+                <Rule Name="Configuration"/>
+            </Rules>
+        </AttributeInfo>
+        <AttributeInfo Name="Remove Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be removed from trunks. Supported format: openflow:1::eth1;openflow:1:eth2">
+            <Rules>
+                <Rule Name="Configuration"/>
+            </Rules>
+        </AttributeInfo>
         <AttributeInfo Name="MAC Address" Type="String" DefaultValue="" IsReadOnly="true">
             <Rules Override="false">
                 <Rule Name="Setting"/>
@@ -114,12 +124,20 @@
                         <AttachedAttribute Name="Password" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
+                        <AttachedAttribute Name="Trunk Ports" IsOverridable="true" IsLocal="true">
+                            <AllowedValues/>
+                        </AttachedAttribute>
+                        <AttachedAttribute Name="Remove Trunk Ports" IsOverridable="true" IsLocal="true">
+                            <AllowedValues/>
+                        </AttachedAttribute>
                     </AttachedAttributes>
                     <AttributeValues>
                         <AttributeValue Name="Scheme" Value=""/>
                         <AttributeValue Name="Port" Value=""/>
                         <AttributeValue Name="User" Value=""/>
                         <AttributeValue Name="Password" Value=""/>
+                        <AttributeValue Name="Trunk Ports" Value=""/>
+                        <AttributeValue Name="Remove Trunk Ports" Value=""/>
                     </AttributeValues>
                     <ParentModels/>
                     <Drivers>
@@ -138,7 +156,7 @@
             <AttachedAttributes/>
             <AttributeValues/>
             <Models>
-                <ResourceModel Name="OpenVSwitch" Description="" SupportsConcurrentCommands="false">
+                <ResourceModel Name="Generic Chassis" Description="" SupportsConcurrentCommands="false">
                     <ParentModels>
                         <ParentModelName>SDN ODL Controller</ParentModelName>
                     </ParentModels>
@@ -200,7 +218,7 @@
                         <AttributeValue Name="Auto Negotiation" Value="False"/>
                     </AttributeValues>
                     <ParentModels>
-                        <ParentModelName>OpenVSwitch</ParentModelName>
+                        <ParentModelName>Generic Chassis</ParentModelName>
                     </ParentModels>
                     <Drivers/>
                 </ResourceModel>

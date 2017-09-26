@@ -14,6 +14,8 @@ xmlns="http://schemas.qualisystems.com/ResourceManagement/ShellsConfigurationSch
             <Attribute Name="Port" Value="8181" />
 			<Attribute Name="User" Value="" />
 			<Attribute Name="Password" Value="" />
+            <Attribute Name="Trunk Ports" Value="" />
+            <Attribute Name="Remove Trunk Ports" Value="" />
         </Attributes>
     </ResourceTemplate>
 
