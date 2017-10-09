@@ -2,7 +2,7 @@
 <DataModelInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xmlns="http://schemas.qualisystems.com/ResourceManagement/DataModelSchema.xsd">
     <Attributes>
-        <AttributeInfo Name="User" Type="String" DefaultValue="" IsReadOnly="false">
+        <AttributeInfo Name="User" Type="String" DefaultValue="" IsReadOnly="false" Description="User with administrative privileges">
             <Rules>
                 <Rule Name="Configuration"/>
             </Rules>
@@ -12,7 +12,12 @@
                 <Rule Name="Configuration"/>
             </Rules>
         </AttributeInfo>
-        <AttributeInfo Name="Port" Type="String" DefaultValue="" IsReadOnly="false">
+        <AttributeInfo Name="Model Name" Type="String" DefaultValue="" IsReadOnly="false">
+            <Rules>
+                <Rule Name="Configuration"/>
+            </Rules>
+        </AttributeInfo>
+        <AttributeInfo Name="Controller TCP Port" Type="String" DefaultValue="" IsReadOnly="false">
             <Rules>
                 <Rule Name="Configuration"/>
             </Rules>
@@ -22,12 +27,12 @@
                 <Rule Name="Configuration"/>
             </Rules>
         </AttributeInfo>
-        <AttributeInfo Name="Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be added as a trunk (All 802.1Q tagged traffic from the connected ports will be able to rich these ports). Supported format: openflow:1::eth1;openflow:1:eth2">
+        <AttributeInfo Name="Enable Full Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be added as a trunk (All 802.1Q tagged traffic from the connected ports will be able to rich these ports). Supported format: openflow:1::eth1;openflow:1:eth2">
             <Rules>
                 <Rule Name="Configuration"/>
             </Rules>
         </AttributeInfo>
-        <AttributeInfo Name="Remove Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be removed from trunks. Supported format: openflow:1::eth1;openflow:1:eth2">
+        <AttributeInfo Name="Disable Full Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be removed from trunks. Supported format: openflow:1::eth1;openflow:1:eth2">
             <Rules>
                 <Rule Name="Configuration"/>
             </Rules>
@@ -115,7 +120,7 @@
                                 <AllowedValue>https</AllowedValue>
                             </AllowedValues>
                         </AttachedAttribute>
-                        <AttachedAttribute Name="Port" IsOverridable="true" IsLocal="true">
+                        <AttachedAttribute Name="Controller TCP Port" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
                         <AttachedAttribute Name="User" IsOverridable="true" IsLocal="true">
@@ -124,20 +129,20 @@
                         <AttachedAttribute Name="Password" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
-                        <AttachedAttribute Name="Trunk Ports" IsOverridable="true" IsLocal="true">
+                        <AttachedAttribute Name="Enable Full Trunk Ports" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
-                        <AttachedAttribute Name="Remove Trunk Ports" IsOverridable="true" IsLocal="true">
+                        <AttachedAttribute Name="Disable Full Trunk Ports" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
                     </AttachedAttributes>
                     <AttributeValues>
                         <AttributeValue Name="Scheme" Value=""/>
-                        <AttributeValue Name="Port" Value=""/>
+                        <AttributeValue Name="Controller TCP Port" Value=""/>
                         <AttributeValue Name="User" Value=""/>
                         <AttributeValue Name="Password" Value=""/>
-                        <AttributeValue Name="Trunk Ports" Value=""/>
-                        <AttributeValue Name="Remove Trunk Ports" Value=""/>
+                        <AttributeValue Name="Enable Full Trunk Ports" Value=""/>
+                        <AttributeValue Name="Disable Full Trunk Ports" Value=""/>
                     </AttributeValues>
                     <ParentModels/>
                     <Drivers>
