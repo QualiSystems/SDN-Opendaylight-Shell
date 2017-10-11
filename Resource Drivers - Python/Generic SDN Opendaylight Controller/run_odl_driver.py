@@ -79,7 +79,7 @@ request = """{"driverRequest": {"actions": [{"connectionId": "09faa654-9189-4b99
                                               "type": "setVlan"}]}}"""
 
 
-address = 'localhost'
+address = '192.168.85.10'
 # address = '192.168.85.17'
 
 user = 'admin'
@@ -98,12 +98,17 @@ context.reservation.reservation_id = 'test_id'
 context.resource.attributes = {}
 context.resource.attributes['User'] = user
 context.resource.attributes['Password'] = password
-context.resource.attributes['Scheme'] = "http"
-context.resource.attributes['Port'] = port
-# context.resource.attributes['Trunk Ports'] = "openflow:1::s1-eth1;openflow:1::s1-eth2"
-context.resource.attributes['Remove Trunk Ports'] = "openflow:1::s1-eth2;"
+context.resource.attributes['Scheme'] = "HTTP"
+context.resource.attributes['Controller TCP Port'] = port
+# context.resource.attributes['Enable Full Trunk Ports'] = "openflow:1::s1-eth1;openflow:1::s1-eth2"
+context.resource.attributes['Disable Full Trunk Ports'] = "openflow:1::s1-eth2;"
 
 context.resource.address = address
+import mock
+context.connectivity = mock.MagicMock()
+context.connectivity.server_address = "192.168.85.48"
+
+
 
 
 class MyThread(Thread):
@@ -111,6 +116,37 @@ class MyThread(Thread):
         print('{} deleted'.format(self.name))
 
 
+# if __name__ == '__main__':
+#     driver = OpendaylightResourceDriver()
+#     driver.initialize(context)
+#     # driver = JunosResourceDriver()
+#
+#     # driver.save(context, '','')
+#     # print(driver.send_custom_command(context, 'show run'))
+#     # print(driver.send_custom_command(context, 'show interfaces'))
+#     # print(driver.update_firmware(context, 'tftp://yar:pass@10.2.5.6:8435/test_path/test_file/323', ''))
+#     with patch('driver.get_api') as get_api:
+#         get_api.return_value = type('api', (object,), {
+#             'DecryptPassword': lambda self, pw: type('Password', (object,), {'Value': pw})()})()
+#         out = driver.get_inventory(context)
+#
+#         # driver.ApplyConnectivityChanges(context=context, request=request)
+#
+#         # print(inv)
+#         # out = driver.save(context, '', '', None)
+#         # out = driver.restore(context, 'ftp://junos:junos@192.168.85.23/dsada-running-040117-144312', None, None, None)
+#         # out = driver.load_firmware(context, 'dsadas', None)
+#         # out = driver.get_inventory(context)
+#         # out = driver.ApplyConnectivityChanges(context, request)
+#
+#         for xx in out.resources:
+#             print xx.__dict__
+#
+#         print(out)
+
+
+
+# CLOUDSHELL
 if __name__ == '__main__':
     driver = OpendaylightResourceDriver()
     driver.initialize(context)
@@ -120,21 +156,21 @@ if __name__ == '__main__':
     # print(driver.send_custom_command(context, 'show run'))
     # print(driver.send_custom_command(context, 'show interfaces'))
     # print(driver.update_firmware(context, 'tftp://yar:pass@10.2.5.6:8435/test_path/test_file/323', ''))
-    with patch('driver.get_api') as get_api:
-        get_api.return_value = type('api', (object,), {
-            'DecryptPassword': lambda self, pw: type('Password', (object,), {'Value': pw})()})()
-        out = driver.get_inventory(context)
+    # with patch('driver.get_api') as get_api:
+    #     get_api.return_value = type('api', (object,), {
+    #         'DecryptPassword': lambda self, pw: type('Password', (object,), {'Value': pw})()})()
+    out = driver.get_inventory(context)
 
-        # driver.ApplyConnectivityChanges(context=context, request=request)
+    # driver.ApplyConnectivityChanges(context=context, request=request)
 
-        # print(inv)
-        # out = driver.save(context, '', '', None)
-        # out = driver.restore(context, 'ftp://junos:junos@192.168.85.23/dsada-running-040117-144312', None, None, None)
-        # out = driver.load_firmware(context, 'dsadas', None)
-        # out = driver.get_inventory(context)
-        # out = driver.ApplyConnectivityChanges(context, request)
+    # print(inv)
+    # out = driver.save(context, '', '', None)
+    # out = driver.restore(context, 'ftp://junos:junos@192.168.85.23/dsada-running-040117-144312', None, None, None)
+    # out = driver.load_firmware(context, 'dsadas', None)
+    # out = driver.get_inventory(context)
+    # out = driver.ApplyConnectivityChanges(context, request)
 
-        for xx in out.resources:
-            print xx.__dict__
+    for xx in out.resources:
+        print xx.__dict__
 
-        print(out)
+    print(out)

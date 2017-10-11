@@ -27,25 +27,17 @@
                 <Rule Name="Configuration"/>
             </Rules>
         </AttributeInfo>
-        <AttributeInfo Name="Enable Full Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be added as a trunk (All 802.1Q tagged traffic from the connected ports will be able to rich these ports). Supported format: openflow:1::eth1;openflow:1:eth2">
+        <AttributeInfo Name="Enable Full Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Optional. in case need to configure a full trunk port (example: ports that private cloud provider are connected to) the ports should be listed in format: openflow:1::eth1;openflow:1:eth2">
             <Rules>
                 <Rule Name="Configuration"/>
             </Rules>
         </AttributeInfo>
-        <AttributeInfo Name="Disable Full Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Ports that will be removed from trunks. Supported format: openflow:1::eth1;openflow:1:eth2">
+        <AttributeInfo Name="Disable Full Trunk Ports" Type="String" DefaultValue="" IsReadOnly="false" Description="Optional. in case need to remove a full trunk port configuration the ports should be listed in format: openflow:1::eth1;openflow:1:eth2">
             <Rules>
                 <Rule Name="Configuration"/>
             </Rules>
         </AttributeInfo>
         <AttributeInfo Name="MAC Address" Type="String" DefaultValue="" IsReadOnly="true">
-            <Rules Override="false">
-                <Rule Name="Setting"/>
-                <Rule Name="Available For Abstract Resources"/>
-            </Rules>
-        </AttributeInfo>
-        <AttributeInfo Name="L2 Protocol Type"
-                       Description="The L2 protocol type configured on the interface. For example POS, Serial."
-                       Type="String" DefaultValue="" IsReadOnly="true">
             <Rules Override="false">
                 <Rule Name="Setting"/>
                 <Rule Name="Available For Abstract Resources"/>
@@ -69,38 +61,7 @@
                 <Rule Name="Available For Abstract Resources"/>
             </Rules>
         </AttributeInfo>
-        <AttributeInfo Name="Bandwidth" Type="Numeric" DefaultValue="0" IsReadOnly="true">
-            <Rules Override="false">
-                <Rule Name="Setting"/>
-                <Rule Name="Available For Abstract Resources"/>
-            </Rules>
-        </AttributeInfo>
-        <AttributeInfo Name="MTU" Type="Numeric" DefaultValue="0" IsReadOnly="true">
-            <Rules Override="false">
-                <Rule Name="Setting"/>
-                <Rule Name="Available For Abstract Resources"/>
-            </Rules>
-        </AttributeInfo>
-        <AttributeInfo xsi:type="LookupAttributeDetails" Name="Duplex"
-                       Description="The current duplex configuration on the interface. Possible values are Half or Full."
-                       Type="Lookup" DefaultValue="Half"
-                       IsReadOnly="true">
-            <Rules Override="false">
-                <Rule Name="Setting"/>
-                <Rule Name="Available For Abstract Resources"/>
-            </Rules>
-            <LookupValues>
-                <LookupValue NumericValue="2" StringValue="Half"/>
-                <LookupValue NumericValue="3" StringValue="Full"/>
-            </LookupValues>
-        </AttributeInfo>
         <AttributeInfo Name="Adjacent" Type="String" DefaultValue="" IsReadOnly="true">
-            <Rules Override="false">
-                <Rule Name="Setting"/>
-                <Rule Name="Available For Abstract Resources"/>
-            </Rules>
-        </AttributeInfo>
-        <AttributeInfo Name="Auto Negotiation" Type="Boolean" DefaultValue="False" IsReadOnly="true">
             <Rules Override="false">
                 <Rule Name="Setting"/>
                 <Rule Name="Available For Abstract Resources"/>
@@ -112,7 +73,7 @@
             <AttachedAttributes/>
             <AttributeValues/>
             <Models>
-                <ResourceModel Name="SDN ODL Controller" Description="" SupportsConcurrentCommands="true">
+                <ResourceModel Name="SDN Controller" Description="" SupportsConcurrentCommands="true">
                     <AttachedAttributes>
                         <AttachedAttribute Name="Scheme" IsOverridable="true" IsLocal="true">
                             <AllowedValues>
@@ -153,28 +114,25 @@
             </Models>
             <Categories/>
         </ResourceFamily>
-        <ResourceFamily Name="Chassis" IsMappableContainer="false">
+        <ResourceFamily Name="SDN Switch" IsMappableContainer="false">
             <AttachedAttributes/>
             <AttributeValues/>
             <Models>
-                <ResourceModel Name="Generic Chassis" Description="" SupportsConcurrentCommands="false">
+                <ResourceModel Name="Generic SDN Switch" Description="" SupportsConcurrentCommands="false">
                     <ParentModels>
-                        <ParentModelName>SDN ODL Controller</ParentModelName>
+                        <ParentModelName>SDN Controller</ParentModelName>
                     </ParentModels>
                     <Drivers/>
                 </ResourceModel>
             </Models>
         </ResourceFamily>
-        <ResourceFamily Name="Port" IsSearchable="true" IsConnectable="true" IsLockedByDefault="true">
+        <ResourceFamily Name="SDN Port" IsSearchable="true" IsConnectable="true" IsLockedByDefault="true">
             <AttachedAttributes/>
             <AttributeValues/>
             <Models>
-                <ResourceModel Name="Generic Port" Description="" SupportsConcurrentCommands="false">
+                <ResourceModel Name="Generic SDN Port" Description="" SupportsConcurrentCommands="false">
                     <AttachedAttributes>
                         <AttachedAttribute Name="MAC Address" IsOverridable="true" IsLocal="true">
-                            <AllowedValues/>
-                        </AttachedAttribute>
-                        <AttachedAttribute Name="L2 Protocol Type" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
                         <AttachedAttribute Name="IPv4 Address" IsOverridable="true" IsLocal="true">
@@ -186,36 +144,19 @@
                         <AttachedAttribute Name="Port Description" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
-                        <AttachedAttribute Name="Bandwidth" IsOverridable="true" IsLocal="true">
-                            <AllowedValues/>
-                        </AttachedAttribute>
-                        <AttachedAttribute Name="MTU" IsOverridable="true" IsLocal="true">
-                            <AllowedValues/>
-                        </AttachedAttribute>
-                        <AttachedAttribute Name="Duplex" IsOverridable="true" IsLocal="true">
-                            <AllowedValues/>
-                        </AttachedAttribute>
                         <AttachedAttribute Name="Adjacent" IsOverridable="true" IsLocal="true">
-                            <AllowedValues/>
-                        </AttachedAttribute>
-                        <AttachedAttribute Name="Auto Negotiation" IsOverridable="true" IsLocal="true">
                             <AllowedValues/>
                         </AttachedAttribute>
                     </AttachedAttributes>
                     <AttributeValues>
                         <AttributeValue Name="MAC Address" Value=""/>
-                        <AttributeValue Name="L2 Protocol Type" Value=""/>
                         <AttributeValue Name="IPv4 Address" Value=""/>
                         <AttributeValue Name="IPv6 Address" Value=""/>
                         <AttributeValue Name="Port Description" Value=""/>
-                        <AttributeValue Name="Bandwidth" Value="0"/>
-                        <AttributeValue Name="MTU" Value="0"/>
-                        <AttributeValue Name="Duplex" Value="Half"/>
                         <AttributeValue Name="Adjacent" Value=""/>
-                        <AttributeValue Name="Auto Negotiation" Value="False"/>
                     </AttributeValues>
                     <ParentModels>
-                        <ParentModelName>Generic Chassis</ParentModelName>
+                        <ParentModelName>Generic SDN Switch</ParentModelName>
                     </ParentModels>
                     <Drivers/>
                 </ResourceModel>
